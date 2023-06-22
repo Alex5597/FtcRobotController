@@ -98,7 +98,8 @@ public class OdometryTest extends LinearOpMode {
                 Target_PosX-=10;
             else if(gamepad1.y)
                 Target_PosY-=10;
-            setMotorPower(0.3);
+            setMotorPowerOY(0.5);
+            setMotorPowerOX(0.5);
             telemetry.addData("Pozitie pe OX fata de start:",Pos_X);
             telemetry.addData("Pozitie pe OY fata de start:",Pos_Y);
             telemetry.addData("Unghi rotire:",heading);
@@ -146,7 +147,7 @@ public class OdometryTest extends LinearOpMode {
     private static double encoderTicksToCms(double ticks) {
         return WHEEL_RADIUS * 2 * Math.PI * ticks / TICKS_PER_REV;
     }
-    private void setMotorPower(double pow)
+    private void setMotorPowerOY(double pow)
     {
         if(Pos_Y<Target_PosY+5||Target_PosY-5<Pos_Y) {
             if(Pos_Y<Target_PosY)
@@ -155,6 +156,17 @@ public class OdometryTest extends LinearOpMode {
             LBM.setPower(pow);
             RBM.setPower(pow);
             RFM.setPower(pow);
+        }
+    }
+    private void setMotorPowerOX(double pow)
+    {
+        if(Pos_X<Target_PosX+5||Target_PosX-5<Pos_X) {
+            if(Pos_X<Target_PosY)
+                pow=-pow;
+            LFM.setPower(pow);
+            LBM.setPower(-pow);
+            RBM.setPower(pow);
+            RFM.setPower(-pow);
         }
     }
 }
