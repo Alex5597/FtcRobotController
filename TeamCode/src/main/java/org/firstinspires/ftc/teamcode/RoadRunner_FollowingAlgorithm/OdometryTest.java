@@ -93,6 +93,7 @@ public class OdometryTest extends LinearOpMode {
 
             else if(gamepad1.b)
                 Target_PosY+=10;
+
             else if(gamepad1.x)
                 Target_PosX-=10;
             else if(gamepad1.y)
